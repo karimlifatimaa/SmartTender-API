@@ -27,7 +27,7 @@ namespace SmartTender_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
-            var user = new AppUser { UserName = dto.UserName, Email = dto.Email };
+            var user = new AppUser { UserName = dto.UserName, Email = dto.Email, FullName = dto.FullName };
             var result = await _userManager.CreateAsync(user, dto.Password);
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
@@ -49,11 +49,15 @@ namespace SmartTender_API.Controllers
 
         private string GenerateJwtToken(AppUser user)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };
+            if (!string.IsNullOrEmpty(user.FullName))
+            {
+                claims.Add(new Claim("fullName", user.FullName));  
+            }
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(

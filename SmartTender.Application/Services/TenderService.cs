@@ -89,7 +89,7 @@ namespace SmartTender.Application.Services
                             TenderCategories = new List<TenderCategory>()
                         };
 
-                        _db.Tenders.Add(tender);
+                        _db.Tenders.Add(tender); 
                         await _db.SaveChangesAsync(); 
 
                         var bomUrl = $"https://etender.gov.az/api/events/{remoteTender.eventId}/bomLines?PageSize=1000&PageNumber=1";
@@ -121,6 +121,7 @@ namespace SmartTender.Application.Services
                                     var bomLine = new BomLine
                                     {
                                          TenderId = tender.EtenderId, // TenderId-ni set et
+                                        //TenderId = tender.Id,
                                         Name = bom.GetProperty("name").GetString(),
                                         Description = bom.GetProperty("description").GetString(),
                                         UnitOfMeasure = bom.GetProperty("unitOfMeasure").GetString(),
@@ -147,6 +148,7 @@ namespace SmartTender.Application.Services
                                     var contactPerson = new ContactPerson
                                     {
                                         TenderId = tender.EtenderId, 
+                                        //TenderId = tender.Id,
                                         FullName = contact.GetProperty("fullName").GetString(),
                                         Contact = contact.GetProperty("contact").GetString(),
                                         Position = contact.GetProperty("position").GetString(),
@@ -184,6 +186,7 @@ namespace SmartTender.Application.Services
                                     var announcement = new Announcement
                                     {
                                         TenderId = tender.EtenderId, // TenderId-ni set et
+                                        //TenderId = tender.Id,
                                         AnnouncementVersion = announcementVersion,
                                         Text = ann.GetProperty("text").GetString()
                                     };
@@ -216,8 +219,8 @@ namespace SmartTender.Application.Services
                             }
                         }
 
-                        _db.Tenders.Add(tender);
-                        await _db.SaveChangesAsync();
+                       // _db.Tenders.Add(tender);
+                        //await _db.SaveChangesAsync();
                         addedCount++;
                         Console.WriteLine($"Yeni tender əlavə olundu: EventId={remoteTender.eventId}, Name={remoteTender.eventName}");
                     }
@@ -255,6 +258,11 @@ namespace SmartTender.Application.Services
             public bool hasNewVersion { get; set; }
             public int privateRfxId { get; set; }
             public JsonElement categoryCodes { get; set; }
+
+            public string? awardedParticipantName { get; set; }
+            public string? awardedParticipantVoen { get; set; }
+            public int documentViewType { get; set; }
+            public int actualVersionId { get; set; }
         }
     }
 } 

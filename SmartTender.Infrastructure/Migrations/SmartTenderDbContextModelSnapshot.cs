@@ -329,7 +329,10 @@ namespace SmartTender.Infrastructure.Migrations
             modelBuilder.Entity("SmartTender.Domain.Tender", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -348,6 +351,9 @@ namespace SmartTender.Infrastructure.Migrations
 
                     b.Property<decimal>("EstimatedAmount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("EtenderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("EventId")
                         .HasColumnType("int");

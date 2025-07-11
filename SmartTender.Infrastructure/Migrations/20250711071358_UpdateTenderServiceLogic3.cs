@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartTender.Infrastructure.Migrations
 {
-    public partial class UpdateTenderServiceLogic : Migration
+    public partial class UpdateTenderServiceLogic3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,9 @@ namespace SmartTender.Infrastructure.Migrations
                 name: "Tenders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EtenderId = table.Column<int>(type: "int", nullable: false),
                     RfxId = table.Column<int>(type: "int", nullable: false),
                     EventId = table.Column<int>(type: "int", nullable: false),
                     TenderName = table.Column<string>(type: "nvarchar(max)", nullable: true),
