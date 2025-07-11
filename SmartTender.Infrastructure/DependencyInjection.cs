@@ -11,7 +11,7 @@ namespace SmartTender.Infrastructure
             services.AddDbContext<SmartTenderDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Default")));
 
-            // Burada digər infrastructure servisləri də əlavə edə bilərsən
+   
 
             return services;
         }

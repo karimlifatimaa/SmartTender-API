@@ -22,12 +22,12 @@ builder.Services.AddApplication();
 builder.Services.AddHttpClient();
 builder.Services.AddHostedService<SmartTender_API.Services.TenderSyncBackgroundService>();
 
-// Identity üçün konfiqurasiya
+
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<SmartTender.Infrastructure.SmartTenderDbContext>()
     .AddDefaultTokenProviders();
 
-// JWT authentication üçün konfiqurasiya
+
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
 {

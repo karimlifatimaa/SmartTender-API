@@ -9,7 +9,6 @@ namespace SmartTender.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<ITenderService, TenderService>();
-            // Burada digər application servisləri də əlavə edə bilərsən
             return services;
         }
     }

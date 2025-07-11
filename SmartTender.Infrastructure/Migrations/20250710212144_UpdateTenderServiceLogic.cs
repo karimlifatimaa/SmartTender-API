@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartTender.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class UpdateTenderServiceLogic : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,8 +54,8 @@ namespace SmartTender.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,20 +66,19 @@ namespace SmartTender.Infrastructure.Migrations
                 name: "Tenders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     RfxId = table.Column<int>(type: "int", nullable: false),
                     EventId = table.Column<int>(type: "int", nullable: false),
-                    TenderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrganizationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrganizationVoen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenderName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrganizationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrganizationVoen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EnvelopeDate = table.Column<long>(type: "bigint", nullable: false),
                     EndDate = table.Column<long>(type: "bigint", nullable: false),
                     PublishDate = table.Column<long>(type: "bigint", nullable: false),
                     StartDate = table.Column<long>(type: "bigint", nullable: false),
-                    BudgetCategoryCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CpvCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BudgetCategoryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CpvCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EventType = table.Column<int>(type: "int", nullable: false),
                     IsRedirectionAvailable = table.Column<bool>(type: "bit", nullable: false),
                     MinNumberOfSuppliers = table.Column<int>(type: "int", nullable: false),
@@ -204,7 +203,7 @@ namespace SmartTender.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenderId = table.Column<int>(type: "int", nullable: false),
                     AnnouncementVersion = table.Column<int>(type: "int", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,11 +223,11 @@ namespace SmartTender.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenderId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UnitOfMeasure = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    CategoryCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnitOfMeasure = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CategoryCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -248,10 +247,10 @@ namespace SmartTender.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenderId = table.Column<int>(type: "int", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
