@@ -14,6 +14,7 @@ namespace SmartTender.Infrastructure
         public DbSet<BomLine> BomLines { get; set; }
         public DbSet<ContactPerson> ContactPersons { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,6 +32,11 @@ namespace SmartTender.Infrastructure
                 .HasOne(tc => tc.Category)
                 .WithMany(c => c.TenderCategories)
                 .HasForeignKey(tc => tc.CategoryId);
+            builder.Entity<RefreshToken>()
+                .HasOne(rt => rt.AppUser)
+                .WithMany(u => u.RefreshTokens)
+                .HasForeignKey(rt => rt.AppUserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 } 

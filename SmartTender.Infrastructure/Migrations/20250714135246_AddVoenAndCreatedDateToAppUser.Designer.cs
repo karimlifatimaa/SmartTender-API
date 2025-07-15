@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartTender.Infrastructure;
 
@@ -11,9 +12,10 @@ using SmartTender.Infrastructure;
 namespace SmartTender.Infrastructure.Migrations
 {
     [DbContext(typeof(SmartTenderDbContext))]
-    partial class SmartTenderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250714135246_AddVoenAndCreatedDateToAppUser")]
+    partial class AddVoenAndCreatedDateToAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -335,41 +337,6 @@ namespace SmartTender.Infrastructure.Migrations
                     b.ToTable("ContactPersons");
                 });
 
-            modelBuilder.Entity("SmartTender.Domain.RefreshToken", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRevoked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsUsed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("RefreshTokens");
-                });
-
             modelBuilder.Entity("SmartTender.Domain.Tender", b =>
                 {
                     b.Property<int>("Id")
@@ -533,17 +500,6 @@ namespace SmartTender.Infrastructure.Migrations
                     b.Navigation("Tender");
                 });
 
-            modelBuilder.Entity("SmartTender.Domain.RefreshToken", b =>
-                {
-                    b.HasOne("SmartTender.Domain.AppUser", "AppUser")
-                        .WithMany("RefreshTokens")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("SmartTender.Domain.TenderCategory", b =>
                 {
                     b.HasOne("SmartTender.Domain.Category", "Category")
@@ -561,11 +517,6 @@ namespace SmartTender.Infrastructure.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Tender");
-                });
-
-            modelBuilder.Entity("SmartTender.Domain.AppUser", b =>
-                {
-                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("SmartTender.Domain.Category", b =>
