@@ -4,6 +4,7 @@ namespace SmartTender.Domain
     {
         public int Id { get; set; }
         public int TenderId { get; set; }
+        // public int EtenderId { get; set; }
         public Tender Tender { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }

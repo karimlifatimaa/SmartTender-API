@@ -3,6 +3,7 @@ namespace SmartTender.Domain
     public class ContactPerson
     {
         public int Id { get; set; }
+        // public int EtenderId { get; set; }
         public int TenderId { get; set; }
         public Tender Tender { get; set; }
         public string? FullName { get; set; }

@@ -27,13 +27,15 @@ namespace SmartTender.Application.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<List<TenderDto>> GetAllTendersAsync()
+        public async Task<List<TenderDto>> GetAllTendersAsync(PaginationParams paginationParams)
         {
             var tenders = await _db.Tenders
                 .Include(t => t.TenderCategories).ThenInclude(tc => tc.Category)
                 .Include(t => t.BomLines)
                 .Include(t => t.ContactPersons)
                 .Include(t => t.Announcements)
+                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+                .Take(paginationParams.PageSize)
                 .ToListAsync();
             return _mapper.Map<List<TenderDto>>(tenders);
         }
@@ -45,7 +47,7 @@ namespace SmartTender.Application.Services
                 .Include(t => t.BomLines)
                 .Include(t => t.ContactPersons)
                 .Include(t => t.Announcements)
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .FirstOrDefaultAsync(t => t.EtenderId == id);
             return _mapper.Map<TenderDto>(tender);
         }
 

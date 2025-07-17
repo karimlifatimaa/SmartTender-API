@@ -6,7 +6,7 @@ namespace SmartTender.Application.Interfaces
 {
     public interface ITenderService
     {
-        Task<List<TenderDto>> GetAllTendersAsync();
+        Task<List<TenderDto>> GetAllTendersAsync(PaginationParams paginationParams);
         Task<TenderDto> GetTenderByIdAsync(int id);
         Task SyncTendersFromRemoteAsync();
     }
